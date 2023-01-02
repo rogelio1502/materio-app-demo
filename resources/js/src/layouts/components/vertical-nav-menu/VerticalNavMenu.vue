@@ -94,7 +94,7 @@
       <nav-menu-section-title title="Demo section"></nav-menu-section-title>
       <nav-menu-link
         title="Todos"
-        :to="{ name: 'demo-datatable' }"
+        :to="{ name: 'todos' }"
         :icon="icons.mdiAllInclusive"
       ></nav-menu-link>
 

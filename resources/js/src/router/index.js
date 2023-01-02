@@ -108,9 +108,9 @@ const routes = [
     },
   },
   {
-    path: '/demo-datatable',
-    name: 'demo-datatable',
-    component: () => import('@/views/pages/DemoDatatable.vue'),
+    path: '/todos',
+    name: 'todos',
+    component: () => import('@/views/todos/Todos.vue'),
     meta: {
       auth: true,
     },

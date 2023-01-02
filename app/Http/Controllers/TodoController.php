@@ -13,7 +13,7 @@ class TodoController extends Controller
 
     public function index()
     {
-        $todos = Todo::all();
+        $todos = Todo::orderBy('id','desc')->get();
         return response()->json([
             'status' => 'success',
             'todos' => $todos,
