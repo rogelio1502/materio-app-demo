@@ -31,12 +31,13 @@
 
 <script>
 import axios from 'axios'
+import todosService from '../../../services/todos.service'
 export default {
   emits: ['todoAdded'],
   data() {
     return {
-      title: '',
-      description: '',
+      title: 'Demo Title',
+      description: 'Demo Description',
       btnTxt: 'Create',
     }
   },
@@ -44,20 +45,12 @@ export default {
     createTodo() {
       if (this.title && this.description) {
         this.btnTxt = 'Creating...'
-        let bodyFormData = new FormData()
-        bodyFormData.append('title', this.title)
-        bodyFormData.append('description', this.description)
-        axios
-          .post('/api/todo', bodyFormData, {
-            headers: {
-              Authorization: 'Bearer ' + JSON.parse(localStorage.getItem('user')).authorisation.token,
-              'Content-Type': 'multipart/form-data',
-            },
-          })
+        todosService
+          .add(this.title, this.description)
           .then(r => {
             this.$emit('todoAdded', 'Todo was added.')
-            this.title = ''
-            this.description = ''
+            this.title = 'Demo Title'
+            this.description = 'Demo Description'
             this.btnTxt = 'Create'
           })
           .catch(e => {

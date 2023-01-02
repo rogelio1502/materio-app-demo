@@ -52,6 +52,7 @@
 
 <script>
 import axios from 'axios'
+import todosService from '../../../services/todos.service'
 export default {
   mounted() {
     this.getTodos()
@@ -65,26 +66,17 @@ export default {
   methods: {
     getTodos() {
       this.todos = []
-      axios
-        .get('/api/todos', {
-          headers: {
-            Authorization: 'Bearer ' + JSON.parse(localStorage.getItem('user')).authorisation.token,
-          },
+      todosService.all().then(r => {
+        r.data.todos.forEach(todo => {
+          this.todos.push(todo)
         })
-        .then(r => {
-          r.data.todos.forEach(todo => {
-            this.todos.push(todo)
-          })
-        })
+      })
     },
     removeTodo(todoId) {
       this.todos = []
-      axios
-        .delete('/api/todo/' + todoId, {
-          headers: {
-            Authorization: 'Bearer ' + JSON.parse(localStorage.getItem('user')).authorisation.token,
-          },
-        })
+      todosService
+        .remove(todoId)
+
         .then(r => {
           this.getTodos()
         })

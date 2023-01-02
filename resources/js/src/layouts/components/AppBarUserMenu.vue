@@ -161,6 +161,7 @@ import {
   mdiHelpCircleOutline,
   mdiLogoutVariant,
 } from '@mdi/js'
+import authService from '../../services/auth.service'
 
 export default {
   setup() {
@@ -179,8 +180,7 @@ export default {
   },
   methods: {
     logout() {
-      localStorage.removeItem('user')
-      this.$router.push('/login')
+      authService.logout()
     },
   },
 }

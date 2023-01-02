@@ -7,6 +7,14 @@
       >
         <v-card>
           <v-card-title>Welcome to my demo!</v-card-title>
+          <v-card-text
+            style="color:red;"
+            v-show="showInvalidCreds"
+          >Invalid Credentials</v-card-text>
+          <v-card-text
+            style="color:red;"
+            v-show="showServerError"
+          >Error to connect to server</v-card-text>
           <v-card-text>
             <v-form>
               <v-text-field
@@ -59,7 +67,7 @@
 <script>
 import { mdiAccountOutline, mdiEmailOutline, mdiCellphone, mdiLockOutline } from '@mdi/js'
 import { ref } from '@vue/composition-api'
-import axios from 'axios'
+import AuthService from '../../services/auth.service'
 
 export default {
   methods: {
@@ -68,27 +76,38 @@ export default {
       if (this.email.length > 0 && this.password.length) {
         bodyFormData.append('email', this.email)
         bodyFormData.append('password', this.password)
-        axios
-          .post('/api/login', bodyFormData, {
-            headers: { 'Content-Type': 'multipart/form-data' },
-          })
+        AuthService.login(bodyFormData)
           .then(r => {
             localStorage.setItem('user', JSON.stringify(r.data))
 
             this.$router.push('/')
           })
           .catch(e => {
-            console.log(e)
+            if (e.response.request.status == 401) {
+              this.showInvalidCreds = true
+            } else {
+              this.showServerError = true
+            }
           })
       }
     },
   },
   watch: {
     isAuth(newV, oldV) {},
+    email(newV, oldV) {
+      this.showInvalidCreds = false
+      this.showServerError = false
+    },
+    password(newV, oldV) {
+      this.showInvalidCreds = false
+      this.showServerError = false
+    },
   },
   data() {
     return {
       isAuth: false,
+      showInvalidCreds: false,
+      showServerError: false,
     }
   },
   setup() {
