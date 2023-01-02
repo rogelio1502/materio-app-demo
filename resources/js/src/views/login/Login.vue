@@ -9,22 +9,6 @@
           <v-card-title>Welcome to my demo!</v-card-title>
           <v-card-text>
             <v-form>
-              <!-- <v-text-field
-            v-model="firstname"
-            :prepend-inner-icon="icons.mdiAccountOutline"
-            label="First Name"
-            outlined
-            dense
-            placeholder="First Name"
-          ></v-text-field>
-          <v-text-field
-            v-model="lastname"
-            :prepend-inner-icon="icons.mdiAccountOutline"
-            label="Last Name"
-            outlined
-            dense
-            placeholder="Last Name"
-          ></v-text-field> -->
               <v-text-field
                 v-model="email"
                 :prepend-inner-icon="icons.mdiEmailOutline"
@@ -45,6 +29,7 @@
               <v-btn
                 block
                 color="primary"
+                @click="login()"
               > Login </v-btn>
 
             </v-form>
@@ -74,17 +59,47 @@
 <script>
 import { mdiAccountOutline, mdiEmailOutline, mdiCellphone, mdiLockOutline } from '@mdi/js'
 import { ref } from '@vue/composition-api'
+import axios from 'axios'
 
 export default {
+  methods: {
+    login() {
+      var bodyFormData = new FormData()
+      if (this.email.length > 0 && this.password.length) {
+        bodyFormData.append('email', this.email)
+        bodyFormData.append('password', this.password)
+        axios
+          .post('/api/login', bodyFormData, {
+            headers: { 'Content-Type': 'multipart/form-data' },
+          })
+          .then(r => {
+            localStorage.setItem('user', JSON.stringify(r.data))
+
+            this.$router.push('/')
+          })
+          .catch(e => {
+            console.log(e)
+          })
+      }
+    },
+  },
+  watch: {
+    isAuth(newV, oldV) {},
+  },
+  data() {
+    return {
+      isAuth: false,
+    }
+  },
   setup() {
-    const firstname = ref('')
-    const lastname = ref('')
-    const email = ref('')
-    const password = ref()
+    // const firstname = ref('')
+    // const lastname = ref('')
+    const email = ref('rogelio15021515@gmail.com')
+    const password = ref('susana15')
 
     return {
-      firstname,
-      lastname,
+      // firstname,
+      // lastname,
       email,
       password,
       // icons

@@ -93,43 +93,7 @@
       ></nav-menu-link>
       <nav-menu-section-title title="Demo section"></nav-menu-section-title>
       <nav-menu-link
-        title="Demo"
-        :to="{ name: 'demo-datatable' }"
-        :icon="icons.mdiAllInclusive"
-      ></nav-menu-link>
-      <nav-menu-link
-        title="Demo"
-        :to="{ name: 'demo-datatable' }"
-        :icon="icons.mdiAllInclusive"
-      ></nav-menu-link>
-      <nav-menu-link
-        title="Demo"
-        :to="{ name: 'demo-datatable' }"
-        :icon="icons.mdiAllInclusive"
-      ></nav-menu-link>
-
-      <nav-menu-link
-        title="Demo"
-        :to="{ name: 'demo-datatable' }"
-        :icon="icons.mdiAllInclusive"
-      ></nav-menu-link>
-      <nav-menu-link
-        title="Demo"
-        :to="{ name: 'demo-datatable' }"
-        :icon="icons.mdiAllInclusive"
-      ></nav-menu-link>
-      <nav-menu-link
-        title="Demo"
-        :to="{ name: 'demo-datatable' }"
-        :icon="icons.mdiAllInclusive"
-      ></nav-menu-link>
-      <nav-menu-link
-        title="Demo"
-        :to="{ name: 'demo-datatable' }"
-        :icon="icons.mdiAllInclusive"
-      ></nav-menu-link>
-      <nav-menu-link
-        title="Demo"
+        title="Todos"
         :to="{ name: 'demo-datatable' }"
         :icon="icons.mdiAllInclusive"
       ></nav-menu-link>
